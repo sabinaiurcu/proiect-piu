@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Agenda-telefonica\EvidentaContacte\EvidentaContacte.csproj" />
   </ItemGroup>
 
 </Project>
