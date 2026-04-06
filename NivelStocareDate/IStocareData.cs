@@ -10,6 +10,6 @@ namespace NivelStocareDate
         Contact GetContact(int id);
         Contact GetContact(string name, string prenume);
         bool UpdateContact(Contact c);
-
+        
     }
 }

@@ -16,7 +16,6 @@ namespace Program
             string locatieFisierSolutie = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.FullName ?? "";
             string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
 
-
             if (formatSalvare != null)
             {
                 switch (formatSalvare)
@@ -26,6 +25,7 @@ namespace Program
                         return new AdministrareContacteMem();
                     case "txt":
                         return new AdministareContacteFisier(caleCompletaFisier + "." + formatSalvare);
+
                 }
             }
             return null;

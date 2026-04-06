@@ -133,5 +133,37 @@ namespace Program
 
 
         }
+        public Mesaj CitireMesajTastatura()
+        {
+            Console.WriteLine("Introduceti id-ul contactului:");
+            int contactId = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Introduceti continutul mesajului:");
+            string continut = Console.ReadLine();
+
+            Console.WriteLine("Alegeti tipul mesajului(1.SMS, 2.Whatsapp, 3.Email, 4.Altele):");
+            int tipmsg = int.Parse(Console.ReadLine());
+            TipMesaj tip = (TipMesaj)tipmsg;
+
+            Console.WriteLine("Alegeti statusul mesajului(1.Citit, 2.Important, 3.Neimportant):");
+            int statusmsg = int.Parse(Console.ReadLine());
+            StatusMesaj status = (StatusMesaj)statusmsg;
+
+            return new Mesaj(0, continut, contactId, tip,status);
+        }
+
+        public void AfisareMesaje(List<Mesaj> mesaje)
+        {
+            if (mesaje.Count == 0)
+            {
+                Console.WriteLine("Nu exista mesaje.");
+                return;
+            }
+            foreach (Mesaj m in mesaje)
+            {
+                Console.WriteLine(m.Info());
+            }
+        }
+
     }
 }
