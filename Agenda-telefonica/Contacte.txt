@@ -1,2 +1,7 @@
 1;sabi;dnjdn;0770626165;fvvff;Prieten;Telefon
 2;fvfvf;vddvf;ddss;vddd;Familie;Telefon
+3;Iurcu;Sabina;0770626165;sabinaiurcu@gmail.com;Familie;15
+4;Popescu;Maria;0770646362;fkdhdkdod;Serviciu;3
+5;Popescu;Maria;0770646362;fkdhdkdod;Serviciu;3
+6;f.jjh;jhukh;0770666666;xkjncjlikj;Familie;Telefon
+7;ionescu;angela;0770564637;fhfhfh;Prieten;5

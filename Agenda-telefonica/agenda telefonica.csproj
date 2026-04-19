@@ -17,4 +17,10 @@
     <ProjectReference Include="..\NivelStocareDate\NivelStocareDate.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Contacte.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
