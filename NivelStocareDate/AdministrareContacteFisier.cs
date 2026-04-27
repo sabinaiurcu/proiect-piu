@@ -39,6 +39,24 @@ namespace NivelStocareDate
 
             return gasit;
         }
+        public bool DeleteContact(int id)
+        {
+            List<Contact> contacte = Getcontacte();
+            bool gasit = false;
+
+            using (StreamWriter sw = new StreamWriter(numeFisier, false))
+            {
+                foreach (Contact c in contacte)
+                {
+                    if (c.Id == id)
+                        gasit = true;      
+                    else
+                        sw.WriteLine(c.ConversieLaSirPentruFisier());
+                }
+            }
+
+            return gasit;
+        }
 
         public void AddContact(Contact contact)
 

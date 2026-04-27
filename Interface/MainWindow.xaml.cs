@@ -1,37 +1,25 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using modele;
+﻿using modele;
 using NivelStocareDate;
+using System.Windows;
+using System.Windows.Media;
+
 namespace Interface
 {
     public partial class MainWindow : Window
     {
         private AdministareContacteFisier _storage;
+
         public MainWindow()
         {
             InitializeComponent();
 
             _storage = new AdministareContacteFisier(@"C:\Users\\mari_\\source\\repos\\sabinaiurcu\\Agenda-telefonica\\Contacte.txt");
 
-            
-            cmbCategorie.ItemsSource = Enum.GetValues(typeof(CategorieContact));
-
-
             RefreshLista();
         }
 
         private void btnAdauga_Click(object sender, RoutedEventArgs e)
         {
-
             string nume = txtNume.Text.Trim();
             string prenume = txtPrenume.Text.Trim();
             string telefon = txtTelefon.Text.Trim();
@@ -44,9 +32,8 @@ namespace Interface
                 return;
             }
 
-            CategorieContact categorie = (CategorieContact)cmbCategorie.SelectedItem;
+            CategorieContact categorie = GetCategorieSelectata();
 
-          
             MetodaContact metode = 0;
             if (chkTelefon.IsChecked == true) metode |= MetodaContact.Telefon;
             if (chkEmail.IsChecked == true) metode |= MetodaContact.Email;
@@ -84,12 +71,76 @@ namespace Interface
             txtPrenume.Text = "";
             txtTelefon.Text = "";
             txtEmail.Text = "";
-            cmbCategorie.SelectedIndex = 0;
+            rbFamilie.IsChecked = true;
             chkTelefon.IsChecked = true;
             chkEmail.IsChecked = false;
             chkWhatsApp.IsChecked = false;
         }
-    }
 
+        private CategorieContact GetCategorieSelectata()
+        {
+            if (rbServciu.IsChecked == true) return CategorieContact.Serviciu;
+            if (rbPrieten.IsChecked == true) return CategorieContact.Prieten;
+            if (rbAltele.IsChecked == true) return CategorieContact.Altele;
+            return CategorieContact.Familie;
+        }
+
+        
+
+        private void btnMenuAdministrare_Click(object sender, RoutedEventArgs e)
+        {
+            panelAdministrare.Visibility = Visibility.Visible;
+            panelCauta.Visibility = Visibility.Collapsed;
+
+            btnMenuAdministrare.Background = new SolidColorBrush(
+                (Color)ColorConverter.ConvertFromString("#2980B9"));
+            btnMenuCauta.Background = new SolidColorBrush(
+                (Color)ColorConverter.ConvertFromString("#2C3E50"));
+        }
+
+        private void btnMenuCauta_Click(object sender, RoutedEventArgs e)
+        {
+            panelAdministrare.Visibility = Visibility.Collapsed;
+            panelCauta.Visibility = Visibility.Visible;
+
+            btnMenuCauta.Background = new SolidColorBrush(
+                (Color)ColorConverter.ConvertFromString("#2980B9"));
+            btnMenuAdministrare.Background = new SolidColorBrush(
+                (Color)ColorConverter.ConvertFromString("#2C3E50"));
+
+        }
+        private void btnCauta_Click(object sender, RoutedEventArgs e)
+        {
+            string numeCautat = txtCauta.Text.Trim();
+
+            if (string.IsNullOrEmpty(numeCautat))
+            {
+                lblCautaMsg.Content = "Introduceți un nume pentru căutare!";
+                lblCautaMsg.Foreground = new SolidColorBrush(
+                    (Color)ColorConverter.ConvertFromString("#E74C3C"));
+                dgRezultate.ItemsSource = null;
+                return;
+            }
+
+            List<Contact> rezultate = _storage.Getcontacte()
+                .Where(c => c.Nume.ToLower().Contains(numeCautat.ToLower()))
+                .ToList();
+
+            if (rezultate.Count == 0)
+            {
+                lblCautaMsg.Content = "Nu a fost găsit niciun contact cu acest nume.";
+                lblCautaMsg.Foreground = new SolidColorBrush(
+                    (Color)ColorConverter.ConvertFromString("#E74C3C"));
+                dgRezultate.ItemsSource = null;
+            }
+            else
+            {
+                lblCautaMsg.Content = $"Au fost găsite {rezultate.Count} contacte.";
+                lblCautaMsg.Foreground = new SolidColorBrush(
+                    (Color)ColorConverter.ConvertFromString("#27AE60"));
+                dgRezultate.ItemsSource = rezultate;
+            }
+        }
+       
+    }
 }
-    
