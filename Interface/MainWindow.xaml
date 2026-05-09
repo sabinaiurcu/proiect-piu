@@ -96,42 +96,32 @@
 
                     <Label Content="Email" Padding="0,0,0,2"/>
                     <TextBox Name="txtEmail" Margin="0,0,0,10"/>
+                    
+                    <Label Content="Data nașterii" Padding="0,0,0,2"/>
+                    <DatePicker x:Name="dtpDataNasterii"
+                    Margin="0,0,0,10"
+                    FontFamily="Segoe UI"
+                    FontSize="13"/>
+                    <Label Content="Categorie" Padding="0,0,0,2"/>
+                    <ComboBox x:Name="cmbCategorie"
+                    Height="30"
+                    Margin="0,0,0,10"
+                    FontFamily="Segoe UI"
+                    FontSize="13"/>
 
-
-                    <Label Content="Categorie" Padding="0,0,0,6"/>
-                    <WrapPanel Margin="0,0,0,10">
-                        <RadioButton x:Name="rbFamilie"
-                 Content="Familie"
-                 GroupName="Categorie"
-                 IsChecked="True"
-                 FontFamily="Segoe UI" FontSize="13"
-                 Margin="0,0,12,6"/>
-                        <RadioButton x:Name="rbServciu"
-                 Content="Serviciu"
-                 GroupName="Categorie"
-                 FontFamily="Segoe UI" FontSize="13"
-                 Margin="0,0,12,6"/>
-                        <RadioButton x:Name="rbPrieten"
-                 Content="Prieten"
-                 GroupName="Categorie"
-                 FontFamily="Segoe UI" FontSize="13"
-                 Margin="0,0,12,6"/>
-                        <RadioButton x:Name="rbAltele"
-                 Content="Altele"
-                 GroupName="Categorie"
-                 FontFamily="Segoe UI" FontSize="13"
-                 Margin="0,0,0,6"/>
-                    </WrapPanel>
 
                     <Label Content="Metode de contact"
                            FontWeight="SemiBold" FontSize="14"
                            Padding="0,12,0,8"/>
-                    <CheckBox Name="chkTelefon" Content="Telefon"
-                              Margin="0,0,0,4" FontFamily="Segoe UI" FontSize="13"/>
-                    <CheckBox Name="chkEmail" Content="Email"
-                              Margin="0,0,0,4" FontFamily="Segoe UI" FontSize="13"/>
-                    <CheckBox Name="chkWhatsApp" Content="WhatsApp"
-                              Margin="0,0,0,16" FontFamily="Segoe UI" FontSize="13"/>
+                    <ListBox x:Name="lstMetode"
+                     SelectionMode="Multiple"
+                     Height="80"
+                     Margin="0,0,0,10"
+                     FontFamily="Segoe UI"
+                     FontSize="13"
+                     BorderBrush="DarkGray"
+                     BorderThickness="1"
+                     Background="#E8ECF0"/>
 
                     <Label Name="lblEroare" Content="" Foreground="#E74C3C"
                            FontWeight="Bold" FontSize="10" Padding="0,0,0,3"/>

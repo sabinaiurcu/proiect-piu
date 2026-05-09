@@ -9,10 +9,13 @@ namespace Interface
     {
         private AdministareContacteFisier _storage;
 
+
         public MainWindow()
         {
             InitializeComponent();
-
+            cmbCategorie.ItemsSource = new List<string> { "Familie", "Serviciu", "Prieten", "Altele" };
+            lstMetode.ItemsSource = new List<string> { "Telefon", "Email", "WhatsApp" };
+            
             _storage = new AdministareContacteFisier(@"C:\Users\\mari_\\source\\repos\\sabinaiurcu\\Agenda-telefonica\\Contacte.txt");
 
             RefreshLista();
@@ -31,23 +34,28 @@ namespace Interface
                 lblEroare.Content = "Completați toate câmpurile!";
                 return;
             }
+            if (dtpDataNasterii.SelectedDate == null)
+            {
+                lblEroare.Content = "Selectați data nașterii!";
+                return;
+            }
+            DateTime dataNasterii = dtpDataNasterii.SelectedDate ?? DateTime.Today;
 
             CategorieContact categorie = GetCategorieSelectata();
 
-            MetodaContact metode = 0;
-            if (chkTelefon.IsChecked == true) metode |= MetodaContact.Telefon;
-            if (chkEmail.IsChecked == true) metode |= MetodaContact.Email;
-            if (chkWhatsApp.IsChecked == true) metode |= MetodaContact.WhatsApp;
+            bool areaTelefon = lstMetode.SelectedItems.Contains("Telefon");
+            bool areEmail = lstMetode.SelectedItems.Contains("Email");
+            bool areWhatsApp = lstMetode.SelectedItems.Contains("WhatsApp");
 
-            if (metode == 0)
+            if (!areaTelefon && !areEmail && !areWhatsApp)
             {
                 lblEroare.Content = "Selectați cel puțin o metodă!";
                 return;
             }
 
             Contact contact = new Contact(0, nume, prenume, telefon, email,
-                                          categorie, metode);
-
+                                          categorie, areaTelefon, areEmail, areWhatsApp);
+          
             if (!contact.SetTelefon(telefon))
             {
                 lblEroare.Content = "Telefonul trebuie să aibă exact 10 cifre!";
@@ -71,21 +79,15 @@ namespace Interface
             txtPrenume.Text = "";
             txtTelefon.Text = "";
             txtEmail.Text = "";
-            rbFamilie.IsChecked = true;
-            chkTelefon.IsChecked = true;
-            chkEmail.IsChecked = false;
-            chkWhatsApp.IsChecked = false;
+            
         }
 
         private CategorieContact GetCategorieSelectata()
         {
-            if (rbServciu.IsChecked == true) return CategorieContact.Serviciu;
-            if (rbPrieten.IsChecked == true) return CategorieContact.Prieten;
-            if (rbAltele.IsChecked == true) return CategorieContact.Altele;
-            return CategorieContact.Familie;
+            return (CategorieContact)cmbCategorie.SelectedIndex;
         }
 
-        
+
 
         private void btnMenuAdministrare_Click(object sender, RoutedEventArgs e)
         {
@@ -122,9 +124,7 @@ namespace Interface
                 return;
             }
 
-            List<Contact> rezultate = _storage.Getcontacte()
-                .Where(c => c.Nume.ToLower().Contains(numeCautat.ToLower()))
-                .ToList();
+            List<Contact> rezultate = _storage.CautaContacteDupaNume(numeCautat);
 
             if (rezultate.Count == 0)
             {

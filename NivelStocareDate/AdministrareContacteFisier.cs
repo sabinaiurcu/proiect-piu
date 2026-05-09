@@ -135,7 +135,21 @@ namespace NivelStocareDate
 
         }
 
-
+        public List<Contact> CautaContacteDupaNume(string nume)
+        {
+            List<Contact> rezultate = new List<Contact>();
+            using (StreamReader streamReader = new StreamReader(numeFisier))
+            {
+                string linieFisier;
+                while ((linieFisier = streamReader.ReadLine()) != null)
+                {
+                    Contact contact = new Contact(linieFisier);
+                    if (contact.Nume.ToLower().Contains(nume.ToLower()))
+                        rezultate.Add(contact);
+                }
+            }
+            return rezultate;
+        }
 
 
 

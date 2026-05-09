@@ -63,6 +63,16 @@ namespace NivelStocareDate
         
         }
 
+        public List<Contact> CautaContacteDupaNume(string nume)
+        {
+            List<Contact> rezultate = new List<Contact>();
+            foreach (Contact c in contacte)
+            {
+                if (c.Nume.ToLower().Contains(nume.ToLower()))
+                    rezultate.Add(c);
+            }
+            return rezultate;
+        }
 
     }
 }

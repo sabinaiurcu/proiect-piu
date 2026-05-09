@@ -46,19 +46,12 @@ namespace modele
         public string Email { get; set; }
         public CategorieContact Categorie { get; set; }
         public MetodaContact Metode { get; set; }
+        public bool AreTelefon { get; set; }
+        public bool AreEmail { get; set; }
+        public bool AreWhatsApp { get; set; }
 
-        public Contact(int id, string nume, string prenume, string telefon, string email)
-
-        {   Id = id;
-            Nume = nume;
-            Prenume = prenume;
-            Telefon = telefon;
-            Email = email;
-            Categorie = CategorieContact.Altele;    
-            Metode = MetodaContact.Telefon;
-
-        }
-        public Contact(int id, string nume, string prenume,string telefon, string email,CategorieContact categorie, MetodaContact metode)
+        public Contact(int id, string nume, string prenume, string telefon, string email,
+                CategorieContact categorie, bool areTelefon, bool areEmail, bool areWhatsApp)
         {
             Id = id;
             Nume = nume;
@@ -66,8 +59,9 @@ namespace modele
             Telefon = telefon;
             Email = email;
             Categorie = categorie;
-            Metode = metode;
-
+            AreTelefon = areTelefon;
+            AreEmail = areEmail;
+            AreWhatsApp = areWhatsApp;
         }
         public Contact(string linieFisier)
         {
@@ -80,22 +74,23 @@ namespace modele
             this.Email = dateFisier[EMAIL];
             this.Categorie = (CategorieContact)Enum.Parse(
                                 typeof(CategorieContact), dateFisier[CATEGORIE]);
-            this.Metode = (MetodaContact)Enum.Parse(
-                                typeof(MetodaContact), dateFisier[METODE]);
+            this.AreTelefon = bool.Parse(dateFisier[6]);
+            this.AreEmail = bool.Parse(dateFisier[7]);
+            this.AreWhatsApp = bool.Parse(dateFisier[8]);
         }
         public string ConversieLaSirPentruFisier()
         {
-            string linie = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}",
+            return string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}{0}{7}{0}{8}{0}{9}",
                 SEPARATOR_PRINCIPAL_FISIER,
-                Id.ToString(),
+                Id,
                 Nume ?? "NECUNOSCUT",
                 Prenume ?? "NECUNOSCUT",
                 Telefon,
                 Email,
                 Categorie.ToString(),
-                Metode.ToString());
-
-            return linie;
+                AreTelefon.ToString(),   
+                AreEmail.ToString(),
+                AreWhatsApp.ToString());
         }
         private bool ValideazaTelefon(string telefon)
         {

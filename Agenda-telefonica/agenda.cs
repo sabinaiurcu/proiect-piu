@@ -31,13 +31,17 @@ namespace Program
             int optCategorie = int.Parse(Console.ReadLine());
             CategorieContact categorie = (CategorieContact)optCategorie;
 
-            Console.WriteLine("Contact(aduna valorile dorite): 1=Telefon, 2=Email, 4=WhatsApp, 8=Messenger ->");
+            Console.WriteLine("Are telefon? (true/false):");
+            bool areTelefon = bool.Parse(Console.ReadLine());
 
-            int optMetode = int.Parse(Console.ReadLine());
-            MetodaContact metode = (MetodaContact)optMetode;
+            Console.WriteLine("Are email? (true/false):");
+            bool areEmail = bool.Parse(Console.ReadLine());
 
-            Contact contactNou = new Contact(urmatorul_id, nume, prenume, telefon, email,categorie,metode);
+            Console.WriteLine("Are WhatsApp? (true/false):");
+            bool areWhatsApp = bool.Parse(Console.ReadLine());
 
+            Contact contactNou = new Contact(urmatorul_id, nume, prenume, telefon, email,
+                                             categorie, areTelefon, areEmail, areWhatsApp);
             urmatorul_id++;
             return contactNou;
 

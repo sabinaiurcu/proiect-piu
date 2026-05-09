@@ -1,8 +1,5 @@
-1;sabi;dnjdn;0770626165;fvvff;Prieten;Telefon
-2;fvfvf;vddvf;ddss;vddd;Familie;Telefon
-3;Iurcu;Sabina;0770626165;sabinaiurcu@gmail.com;Familie;15
-4;Popescu;Maria;0770646362;fkdhdkdod;Serviciu;3
-5;Popescu;Maria;0770646362;fkdhdkdod;Serviciu;3
-6;f.jjh;jhukh;0770666666;xkjncjlikj;Familie;Telefon
-7;ionescu;angela;0770564637;fhfhfh;Prieten;5
-8;ioana;ramona;0770626165;hdfvg;Familie;6
+1;iurcu;sabina;0770626165;sabina@gmail.com;Familie;False;True;False
+2;popescu;ion;0770626165;ion@gmail.com;Familie;True;False;False
+3;gyg;gyujg;0770453627;hghfgh;Prieten;True;False;False
+4;gfjh;fhfh;0760543627;yrfyr;Serviciu;False;False;True
+5;jgjj;vjvj;0706758483;ghj;Prieten;False;True;False
