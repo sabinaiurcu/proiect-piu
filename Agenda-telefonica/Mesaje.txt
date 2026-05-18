@@ -1,0 +1,2 @@
+1;buna!;1;SMS;Necitit
+2;hi;1;SMS;Necitit

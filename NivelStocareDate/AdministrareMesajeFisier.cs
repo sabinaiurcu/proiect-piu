@@ -79,6 +79,22 @@ namespace NivelStocareDate
             }
             return gasit;
         }
+        public bool DeleteMesaj(int id)
+        {
+            List<Mesaj> mesaje = GetMesaje();
+            bool gasit = false;
+            using (StreamWriter sw = new StreamWriter(numeFisier, false))
+            {
+                foreach (Mesaj m in mesaje)
+                {
+                    if (m.Id == id)
+                        gasit = true;   
+                    else
+                        sw.WriteLine(m.ConversieLaSirPentruFisier());
+                }
+            }
+            return gasit;
+        }
 
         private int GetNextId()
         {

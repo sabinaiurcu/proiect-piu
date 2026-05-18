@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 
 namespace modele
 
@@ -19,7 +22,7 @@ namespace modele
    
     }
 
-    public class Contact
+    public class Contact:INotifyPropertyChanged
     {
         private const char SEPARATOR = ' ';
         private const char SEPARATOR_PRINCIPAL_FISIER = ';';
@@ -36,12 +39,20 @@ namespace modele
         private const int CATEGORIE = 5;
         private const int METODE = 6;
 
-
-
+        private string _nume;
+        private string _prenume;
 
         public int Id { get; set; }
-        public string Nume { get; set; }
-        public string Prenume { get; set; }
+        public string Nume
+        {
+            get => _nume;
+            set { _nume = value; OnPropertyChanged(); }
+        }
+        public string Prenume
+        {
+            get => _prenume;
+            set { _prenume = value; OnPropertyChanged(); }
+        }
         public string Telefon { get; set; }
         public string Email { get; set; }
         public CategorieContact Categorie { get; set; }
@@ -63,6 +74,7 @@ namespace modele
             AreEmail = areEmail;
             AreWhatsApp = areWhatsApp;
         }
+        public Contact() { }
         public Contact(string linieFisier)
         {
             string[] dateFisier = linieFisier.Split(SEPARATOR_PRINCIPAL_FISIER);
@@ -124,6 +136,11 @@ namespace modele
 
             string info = $"ID:{Id} Nume:{Nume} Prenume:{Prenume} Telefon:{Telefon} Email:{Email}";
             return info ;
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
