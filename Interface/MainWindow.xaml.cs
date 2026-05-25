@@ -32,8 +32,8 @@ namespace Interface
             cmbStatusMesaj.SelectedIndex = 0;
            
             ContactCurent = new Contact();
-            _storage = new AdministareContacteFisier("Contact.txt");
-            _storageMesaje = new AdministrareMesajeFisier("Mesaje.txt");
+            _storage = new AdministareContacteFisier("../../../../Agenda-telefonica/Contacte.txt");
+            _storageMesaje = new AdministrareMesajeFisier("../../../../Agenda-telefonica/Mesaje.txt");
             RefreshLista();
         }
 

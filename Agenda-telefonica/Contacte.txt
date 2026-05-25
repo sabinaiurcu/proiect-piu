@@ -1,0 +1,5 @@
+﻿1;iurcu;sabina;0770626165;sabina@gmail.com;Familie;False;True;False
+2;popescu;ion;0770626165;ion@gmail.com;Familie;True;False;False
+3;Popovici;Andreea;0761574059;popovici.andreea@gmail.com;Serviciu;True;False;False
+4;sabina;iurcu;0770626165;sklss;Familie;True;True;True
+5;ioana;test;0746552266;jdjd;Serviciu;False;False;True
