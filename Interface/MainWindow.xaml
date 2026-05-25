@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Agendă Telefonică"
         MinWidth="600" MinHeight="400"
-        Width="900" Height="620"
+        Width="1209" Height="818"
         WindowStartupLocation="CenterScreen"
         Background="#F4F6F8">
 
@@ -36,7 +36,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        
+
         <StackPanel Grid.Column="0" Background="#1B2A3B">
             <TextBlock Text="📋 Agenda"
                        Foreground="White" FontSize="15" FontWeight="Bold"
@@ -59,7 +59,7 @@
                     Click="btnMenuMesaje_Click"/>
         </StackPanel>
 
-       
+
         <Grid x:Name="panelAdministrare" Grid.Column="1"
               Margin="16" Visibility="Visible">
             <Grid.ColumnDefinitions>
@@ -76,18 +76,25 @@
 
                     <Label Content="Nume" Padding="0,0,0,2"/>
                     <TextBox Name="txtNume" Margin="0,0,0,10"
-                             Text="{Binding ContactCurent.Nume, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding ContactCurent.Nume, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"/>
+                    <TextBlock Foreground="Red" FontSize="11" Margin="0,0,0,8"
+           Text="{Binding ElementName=txtNume,
+                  Path=(Validation.Errors)/ErrorContent}"/>
 
                     <Label Content="Prenume" Padding="0,0,0,2"/>
                     <TextBox Name="txtPrenume" Margin="0,0,0,10"
-                             Text="{Binding ContactCurent.Prenume, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
+                             Text="{Binding ContactCurent.Prenume, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"/>
+                    <TextBlock Foreground="Red" FontSize="11" Margin="0,0,0,8"
+           Text="{Binding ElementName=txtPrenume,
+                  Path=(Validation.Errors)/ErrorContent}"/>
                     <Label Content="Telefon" Padding="0,0,0,2"/>
-                    <TextBox Name="txtTelefon" Margin="0,0,0,10"/>
+                    <TextBox Name="txtTelefon" Margin="0,0,0,10"
+                             Text="{Binding ContactCurent.Telefon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
                     <Label Content="Email" Padding="0,0,0,2"/>
-                    <TextBox Name="txtEmail" Margin="0,0,0,10"/>
-
+                    <TextBox Name="txtEmail" Margin="0,0,0,10"
+                             Text="{Binding ContactCurent.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                   
                     <Label Content="Data nașterii" Padding="0,0,0,2"/>
                     <DatePicker x:Name="dtpDataNasterii"
                                 Margin="0,0,0,10"
@@ -188,7 +195,7 @@
                         </ListView.View>
                     </ListView>
 
-                    
+
                     <Button Grid.Row="2" x:Name="btnVeziMesaje"
                             Content="Vezi mesajele contactului selectat"
                             Background="#8E44AD" Foreground="White"
@@ -199,7 +206,7 @@
             </Border>
         </Grid>
 
-        
+
         <Grid x:Name="panelCauta" Grid.Column="1"
               Margin="16" Visibility="Collapsed">
             <Border Background="White" CornerRadius="12"
@@ -251,7 +258,7 @@
             </Border>
         </Grid>
 
-        
+
         <Grid x:Name="panelMesaje" Grid.Column="1"
               Margin="16" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
@@ -259,7 +266,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            
+
             <Border Grid.Column="0" Background="White" CornerRadius="12"
                     BorderBrush="#E0E4EA" BorderThickness="1"
                     Margin="0,0,12,0" Padding="20">
@@ -309,7 +316,7 @@
                 </StackPanel>
             </Border>
 
-            
+
             <Border Grid.Column="1" Background="White" CornerRadius="12"
                     BorderBrush="#E0E4EA" BorderThickness="1" Padding="20">
                 <Grid>

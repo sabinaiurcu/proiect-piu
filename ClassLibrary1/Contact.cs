@@ -22,7 +22,7 @@ namespace modele
    
     }
 
-    public class Contact:INotifyPropertyChanged
+    public class Contact : INotifyPropertyChanged
     {
         private const char SEPARATOR = ' ';
         private const char SEPARATOR_PRINCIPAL_FISIER = ';';
@@ -78,17 +78,17 @@ namespace modele
         public Contact(string linieFisier)
         {
             string[] dateFisier = linieFisier.Split(SEPARATOR_PRINCIPAL_FISIER);
-
             this.Id = Convert.ToInt32(dateFisier[ID]);
             this.Nume = dateFisier[NUME];
             this.Prenume = dateFisier[PRENUME];
             this.Telefon = dateFisier[TELEFON];
             this.Email = dateFisier[EMAIL];
             this.Categorie = (CategorieContact)Enum.Parse(
-                                typeof(CategorieContact), dateFisier[CATEGORIE]);
-            this.AreTelefon = bool.Parse(dateFisier[6]);
-            this.AreEmail = bool.Parse(dateFisier[7]);
-            this.AreWhatsApp = bool.Parse(dateFisier[8]);
+                                typeof(CategorieContact), dateFisier[5]);
+            bool.TryParse(dateFisier[6], out bool areTelefon);
+            bool.TryParse(dateFisier[7], out bool areEmail);
+            bool.TryParse(dateFisier[8], out bool areWhatsapp);
+
         }
         public string ConversieLaSirPentruFisier()
         {
@@ -100,7 +100,7 @@ namespace modele
                 Telefon,
                 Email,
                 Categorie.ToString(),
-                AreTelefon.ToString(),   
+                AreTelefon.ToString(),
                 AreEmail.ToString(),
                 AreWhatsApp.ToString());
         }
@@ -128,19 +128,23 @@ namespace modele
             Console.WriteLine("Telefon invalid! Trebuie sa aiba exact 10 cifre.");
             return false;
         }
-    
+
 
 
         public string info()
         {
 
             string info = $"ID:{Id} Nume:{Nume} Prenume:{Prenume} Telefon:{Telefon} Email:{Email}";
-            return info ;
+            return info;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+       
+        
+
     }
+      
 }

@@ -30,25 +30,21 @@ namespace Interface
             cmbStatusMesaj.ItemsSource = Enum.GetValues(typeof(StatusMesaj));
             cmbTipMesaj.SelectedIndex = 0;
             cmbStatusMesaj.SelectedIndex = 0;
-
-            ContactCurent = new Contact(); 
-
-            _storage = new AdministareContacteFisier(@"C:\Users\\mari_\\source\\repos\\sabinaiurcu\\Agenda-telefonica\\Contacte.txt");
-            _storageMesaje = new AdministrareMesajeFisier( @"C:\Users\\mari_\\source\\repos\\sabinaiurcu\\Agenda-telefonica\\Mesaje.txt");
+           
+            ContactCurent = new Contact();
+            _storage = new AdministareContacteFisier("Contact.txt");
+            _storageMesaje = new AdministrareMesajeFisier("Mesaje.txt");
             RefreshLista();
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+
         private void btnAdauga_Click(object sender, RoutedEventArgs e)
         {
+           
             string nume = txtNume.Text.Trim();
             string prenume = txtPrenume.Text.Trim();
             string telefon = txtTelefon.Text.Trim();
             string email = txtEmail.Text.Trim();
-
+            
             if (string.IsNullOrEmpty(nume) || string.IsNullOrEmpty(prenume)
                 || string.IsNullOrEmpty(telefon) || string.IsNullOrEmpty(email))
             {
@@ -169,8 +165,7 @@ namespace Interface
             if (string.IsNullOrEmpty(numeCautat))
             {
                 lblCautaMsg.Content = "Introduceți un nume pentru căutare!";
-                lblCautaMsg.Foreground = new SolidColorBrush(
-                    (Color)ColorConverter.ConvertFromString("#E74C3C"));
+                lblCautaMsg.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E74C3C"));
                 dgRezultate.ItemsSource = null;
                 return;
             }
@@ -316,7 +311,11 @@ namespace Interface
             }
         }
 
-
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
     }
 }

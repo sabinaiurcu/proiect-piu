@@ -75,8 +75,15 @@ namespace NivelStocareDate
             using (StreamReader streamReader = new StreamReader(numeFisier))
             {
                 string linieFisier;
+
                 while ((linieFisier = streamReader.ReadLine()) != null)
                 {
+                    if (string.IsNullOrWhiteSpace(linieFisier))
+                        continue;
+
+                    if (linieFisier.StartsWith("Id;"))
+                        continue;
+
                     contacte.Add(new Contact(linieFisier));
                 }
             }

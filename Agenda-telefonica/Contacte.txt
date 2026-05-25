@@ -1,5 +1,0 @@
-1;iurcu;sabina;0770626165;sabina@gmail.com;Familie;False;True;False
-2;popescu;ion;0770626165;ion@gmail.com;Familie;True;False;False
-3;gyg;gyujg;0770453627;hghfgh;Prieten;True;False;False
-4;gfjh;fhfh;0760543627;yrfyr;Serviciu;False;False;True
-5;jgjj;vjvj;0706758483;ghj;Prieten;False;True;False
